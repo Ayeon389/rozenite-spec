@@ -1,0 +1,5 @@
+= A specification for the Rozenite programming language, version 0.1.0
+
+The specification for the standard library provided by Rozenite.
+
+== Modules
