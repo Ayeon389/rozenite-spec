@@ -1,0 +1,27 @@
+= A specification for the Rozenite programming language, version 0.1.0
+
+This specification defines the syntax for Rozenite, as well as language features.
+
+== Keywords
+
+[options="nowrap"]
+|===
+| if     | else     | while
+| switch | case     | default
+| for    | continue | break
+| fun    | import   | return
+| enum   | using    | struct
+| const  | var      | priv
+| modular| pub      | instanced
+| new    | release  | managed
+| try    | catch    | 
+|===
+
+== Types
+|===
+| int    | float | double
+| string | char  | void
+|===
+
+Instanced modulars are handled as types.
+Struct allows defining datatypes comprised of multiple types.
