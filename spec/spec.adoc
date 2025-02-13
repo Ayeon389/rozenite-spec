@@ -31,3 +31,5 @@ See link:./examples.adoc[examples] for examples of Rozenite syntax.
 
 == How import statements _should_ work in relation to the compiler and runtime
 See link:./imports.adoc[imports] for a specification on how import statements should work.
+
+The language defines an optional minimal standard library. See link:./stdlib.adoc[standard library] for specification.
