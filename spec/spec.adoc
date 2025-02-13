@@ -13,8 +13,8 @@ This specification defines the syntax for Rozenite, as well as language features
 | enum   | using    | struct
 | const  | var      | priv
 | modular| pub      | instanced
-| new    | release  | managed
-| try    | catch    | 
+| new    | free     | try
+| catch  |          |
 |===
 
 == Types
@@ -25,3 +25,87 @@ This specification defines the syntax for Rozenite, as well as language features
 
 Instanced modulars are handled as types.
 Struct allows defining datatypes comprised of multiple types.
+
+== Arrays
+
+----
+var int array[] = {1, 2, 3, 4, 5, 6 ...};
+----
+
+== Block
+
+----
+keyword {
+ ...
+}
+----
+
+== Switch statements
+
+----
+var int a = 2;
+switch (a) {
+  case 1 {
+    ...
+  }
+
+  default {
+    ...
+  }
+}
+----
+
+== Hello World
+
+----
+import io;
+
+using io;
+pub void main() {
+  println("Hello, World");
+}
+----
+
+== How import statements _should_ work in relation to the compiler and runtime
+I say _should_ in italics, because the bootstrap compiler violates this standard for simplicity sakes. This is as the bootstrap compiler doesn't have a reason for being modularly expandable. 
+
+----
+import [name];
+----
+
+How the compiler should function.
+
+1. At the "post-lexing" stage which is called directly before the parser, the compiler will attempt to read in a file, the path depends on if [name] is encased in " or not. If it's encased in "" it'll check for a file locally around the source file. If it isn't enclosed, the compiler will look by default at .rozenite/libs/[name].rz
+2. If it cannot locate these files, it'll produce an error.
+3. If it can locate the file, it'll check if .rozenite/cache/libs/[name].rz exists.
+4. Passes the contents of the rz file through formater->lexer producing a series of tokens.
+5. Inject these tokens in place of the import token
+
+The intended purpose in relation to embedding is that for instance you'd have the following in the [name].rz file.
+----
+pub int doSomething();
+----
+
+This will assume that the compiler provides a definition later on. You simply declare that this -should- exist. As such it'd throw a runtime error.
+
+How the runtime should function.
+
+The runtime C99 API provides the ability to hook native C functions into the runtime. 
+----
+#include <rozenite/runtime.h>
+#include <stdio>
+
+void sayHello() {
+  puts("Hello");
+}
+
+int main() {
+  ...
+  ROZENITE_REGISTER_FUNCTION_HOOK("myLibrary::sayHello", &sayHello);
+  ...
+}
+----
+
+The command line runtime tool, will allow dynamically creating these in some other way. So that if your writing a program in Rozenite, you could also write Rozenite bindings, for a C/C++ library. 
+
+The language defines an optional minimal standard library. See link:./stdlib.adoc[standard library] for specification.
