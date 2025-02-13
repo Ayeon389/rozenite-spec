@@ -1,0 +1,24 @@
+= A specification for the Rozenite programming language, version 0.1.0
+How import statements _should_ work in relation to the compiler and runtime
+
+I say _should_ in italics, because the bootstrap compiler violates this standard for simplicity sakes. This is as the bootstrap compiler doesn't have a reason for being modularly expandable. 
+
+
+How the compiler should function.
+
+1. At the "post-lexing" stage which is called directly before the parser, the compiler will attempt to read in a file, the path depends on if [name] is encased in " or not. If it's encased in "" it'll check for a file locally around the source file. If it isn't enclosed, the compiler will look by default at .rozenite/libs/[name].rz
+2. If it cannot locate these files, it'll produce an error.
+3. If it can locate the file, it'll check if .rozenite/cache/libs/[name].rz exists.
+4. Passes the contents of the rz file through formater->lexer producing a series of tokens.
+5. Inject these tokens in place of the import token
+
+The intended purpose in relation to embedding is that for instance you'd have the following in the [name].rz file.
+----
+pub int doSomething();
+----
+
+This will assume that the compiler provides a definition later on. You simply declare that this -should- exist. As such it'd throw a runtime error.
+
+How the runtime should function.
+
+The runtime C99 API provides the ability to hook native C functions into the runtime. 
