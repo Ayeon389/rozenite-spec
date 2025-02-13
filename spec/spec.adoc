@@ -26,45 +26,8 @@ This specification defines the syntax for Rozenite, as well as language features
 Instanced modulars are handled as types.
 Struct allows defining datatypes comprised of multiple types.
 
-== Arrays
-
-----
-var int array[] = {1, 2, 3, 4, 5, 6 ...};
-----
-
-== Block
-
-----
-keyword {
- ...
-}
-----
-
-== Switch statements
-
-----
-var int a = 2;
-switch (a) {
-  case 1 {
-    ...
-  }
-
-  default {
-    ...
-  }
-}
-----
-
-== Hello World
-
-----
-import io;
-
-using io;
-pub void main() {
-  println("Hello, World");
-}
-----
+== Examples
+See link:./examples.adoc[examples] for examples of Rozenite syntax.
 
 == How import statements _should_ work in relation to the compiler and runtime
 I say _should_ in italics, because the bootstrap compiler violates this standard for simplicity sakes. This is as the bootstrap compiler doesn't have a reason for being modularly expandable. 
