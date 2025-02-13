@@ -1,0 +1,43 @@
+= A specification for the Rozenite programming language, version 0.1.0
+
+A list of examples demonstrating the syntax of Rozenite.
+
+== Arrays
+
+----
+var int array[] = {1, 2, 3, 4, 5, 6 ...};
+----
+
+== Block
+
+----
+keyword {
+ ...
+}
+----
+
+== Switch statements
+
+----
+var int a = 2;
+switch (a) {
+  case 1 {
+    ...
+  }
+
+  default {
+    ...
+  }
+}
+----
+
+== Hello World
+
+----
+import io;
+
+using io;
+pub void main() {
+  println("Hello, World");
+}
+----
